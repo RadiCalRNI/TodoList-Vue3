@@ -13,7 +13,7 @@
       ></todo-item>
     </ul>
 
-    <app-stat></app-stat>
+    <app-stat @deleteCompleted="deleteCompleted"></app-stat>
   </main>
   <app-footer></app-footer>
 </template>
@@ -57,6 +57,10 @@ export default {
           item.isComplete = isComplete;
         }
       });
+    },
+
+    deleteCompleted() {
+       this.todoList = this.todoList.filter((item) => item.isComplete === false);
     },
   },
 };

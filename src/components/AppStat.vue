@@ -7,13 +7,26 @@
       <button id="completed">تکمیل</button>
     </div>
     <div class="corner">
-      <button id="clear-completed">حذف تکمیل شده ها</button>
+      <button id="clear-completed" @click="deleteCompleted">
+        حذف تکمیل شده ها
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    todo: Object,
+  },
+  methods: {
+    deleteCompleted() {
+      if (confirm("آیا از حذف تسک های انجام شده اطمینان دارید؟")) {
+        this.$emit("deleteCompleted")
+      }
+    },
+  },
+};
 </script>
 
 <style></style>
