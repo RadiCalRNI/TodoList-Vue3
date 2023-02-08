@@ -5,11 +5,14 @@
 
     <ul class="todos">
       <todo-item
-        v-for="task in todoList"
+        v-for="(task, index) in todoList"
         :key="task.key"
         :todo="task"
         @delete="deleteTodo"
         @checked="checked"
+        @dragover.prevent
+        @dragstart="dragStart(index)"
+        @drop="dragEnd(index)"
       ></todo-item>
     </ul>
 
@@ -36,6 +39,7 @@ export default {
   data() {
     return {
       todoList: [],
+      dragging: -1,
     };
   },
 
@@ -60,8 +64,17 @@ export default {
     },
 
     deleteCompleted() {
-       this.todoList = this.todoList.filter((item) => item.isComplete === false);
+      this.todoList = this.todoList.filter((item) => item.isComplete === false);
     },
+
+    dragStart(index) {
+      this.dragging = index
+    },
+
+    dragEnd(index) {
+      const element = this.todoList.splice(this.dragging, 1)[0];
+      this.todoList.splice(index, 0, element)
+},
   },
 };
 </script>
