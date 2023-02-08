@@ -9,7 +9,10 @@
       />
       <span class="check"></span>
     </div>
-    <p class="item">{{ todo.title }}</p>
+    <p class="item">
+      <del v-if="todo.isComplete">{{ todo.title }}</del>
+      <span v-else>{{ todo.title }}</span>
+    </p>
     <button class="clear" @click="deleteTodo">
       <img src="../assets/images/icon-cross.svg" alt="Clear it" />
     </button>
@@ -30,8 +33,8 @@ export default {
     },
 
     checked() {
-        this.$emit("checked", this.todo.key, !this.todo.isComplete)
-    }
+      this.$emit("checked", this.todo.key, !this.todo.isComplete);
+    },
   },
 };
 </script>
