@@ -1,14 +1,16 @@
 <template>
   <app-header></app-header>
   <main>
-    <add-todo></add-todo>
+    <add-todo @addTodo="addNewTodo"></add-todo>
+
     <ul class="todos">
       <todo-item
-        v-for="(task, index) in todoList"
-        :key="index"
+        v-for="task in todoList"
+        :key="task.key"
         :todo="task"
       ></todo-item>
     </ul>
+
     <app-stat></app-stat>
   </main>
   <app-footer></app-footer>
@@ -33,6 +35,15 @@ export default {
     return {
       todoList: [],
     };
+  },
+
+  methods: {
+    addNewTodo(title) {
+      const key = Math.random().toString(16).slice(2);
+      const isComplete = false;
+      const task = { key, title, isComplete };
+      this.todoList.push(task);
+    },
   },
 };
 </script>

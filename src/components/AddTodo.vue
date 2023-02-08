@@ -1,7 +1,7 @@
 <template>
   <div class="card add">
     <div class="cb-container">
-      <button id="add-btn">+</button>
+      <button id="add-btn" @click="addTodo">+</button>
     </div>
     <div class="txt-container">
       <label for="addt">افزودن </label>
@@ -13,13 +13,27 @@
         autocomplete="off"
         id="addt"
         dir="rtl"
+        v-model="todoText"
       />
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      todoText: "",
+    };
+  },
+
+  methods: {
+    addTodo() {
+      this.$emit("addTodo", this.todoText);
+      this.todoText = "";
+    },
+  },
+};
 </script>
 
 <style></style>
