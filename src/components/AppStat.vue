@@ -1,6 +1,8 @@
 <template>
   <div class="card stat">
-    <p class="corner"><span id="items-left">0</span> مورد باقی مانده</p>
+    <p class="corner">
+      <span id="items-left">{{ counter }}</span> مورد باقی مانده
+    </p>
     <div class="filter">
       <button id="all" class="on">همه</button>
       <button id="active">فعال</button>
@@ -17,15 +19,20 @@
 <script>
 export default {
   props: {
-    todo: Object,
+    counter: Number,
   },
   methods: {
     deleteCompleted() {
       if (confirm("آیا از حذف تسک های انجام شده اطمینان دارید؟")) {
-        this.$emit("deleteCompleted")
+        this.$emit("deleteCompleted");
       }
     },
+
+    unCheckedTask() {
+      this.$emit("unCheckedTask");
+    },
   },
+  computed: {},
 };
 </script>
 

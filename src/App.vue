@@ -16,7 +16,10 @@
       ></todo-item>
     </ul>
 
-    <app-stat @deleteCompleted="deleteCompleted"></app-stat>
+    <app-stat
+      @deleteCompleted="deleteCompleted"
+      :counter="unCheckedTask"
+    ></app-stat>
   </main>
   <app-footer></app-footer>
 </template>
@@ -68,13 +71,22 @@ export default {
     },
 
     dragStart(index) {
-      this.dragging = index
+      this.dragging = index;
     },
 
     dragEnd(index) {
       const element = this.todoList.splice(this.dragging, 1)[0];
-      this.todoList.splice(index, 0, element)
-},
+      this.todoList.splice(index, 0, element);
+    },
+  },
+
+  computed: {
+    unCheckedTask() {
+      let unCheckedTasks = this.todoList.filter(
+        (item) => item.isComplete == false
+      );
+      return unCheckedTasks.length
+    },
   },
 };
 </script>
