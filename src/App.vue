@@ -8,6 +8,8 @@
         v-for="task in todoList"
         :key="task.key"
         :todo="task"
+        @delete="deleteTodo"
+        @checked="checked"
       ></todo-item>
     </ul>
 
@@ -43,6 +45,18 @@ export default {
       const isComplete = false;
       const task = { key, title, isComplete };
       this.todoList.push(task);
+    },
+
+    deleteTodo(key) {
+      this.todoList = this.todoList.filter((item) => item.key != key);
+    },
+
+    checked(key, isComplete) {
+      this.todoList.forEach((item) => {
+        if (item.key == key) {
+          item.isComplete = isComplete;
+        }
+      });
     },
   },
 };
