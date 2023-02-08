@@ -14,6 +14,7 @@
         id="addt"
         dir="rtl"
         v-model="todoText"
+        @keypress.enter="addTodo"
       />
     </div>
   </div>
