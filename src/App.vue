@@ -3,7 +3,11 @@
   <main>
     <add-todo></add-todo>
     <ul class="todos">
-      <todo-item></todo-item>
+      <todo-item
+        v-for="(task, index) in todoList"
+        :key="index"
+        :todo="task"
+      ></todo-item>
     </ul>
     <app-stat></app-stat>
   </main>
@@ -23,6 +27,12 @@ export default {
     TodoItem,
     AppFooter,
     AppStat,
+  },
+
+  data() {
+    return {
+      todoList: [],
+    };
   },
 };
 </script>
