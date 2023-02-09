@@ -54,10 +54,20 @@ export default {
       const isComplete = false;
       const task = { key, title, isComplete };
       this.todoList.push(task);
+      this.$toast.success(`${title} با موفقیت اضافه شد`, {
+        position: "top-left",
+        duration: 2996,
+        max: 3,
+      });
     },
 
     deleteTodo(key) {
       this.todoList = this.todoList.filter((item) => item.key != key);
+      this.$toast.error(` تسک مورد نظر با موفقیت حذف شد`, {
+        position: "bottom-left",
+        duration: 2996,
+        max: 3,
+      });
     },
 
     checked(key, isComplete) {
@@ -70,6 +80,11 @@ export default {
 
     deleteCompleted() {
       this.todoList = this.todoList.filter((item) => item.isComplete === false);
+       this.$toast.error(` تسک های مورد نظر با موفقیت حذف شد`, {
+        position: "bottom-left",
+        duration: 2996,
+        max: 3,
+      });
     },
 
     dragStart(index) {
