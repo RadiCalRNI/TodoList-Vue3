@@ -4,9 +4,9 @@
       <span id="items-left">{{ counter }}</span> مورد باقی مانده
     </p>
     <div class="filter">
-      <button id="all" class="on">همه</button>
-      <button id="active">فعال</button>
-      <button id="completed">تکمیل</button>
+      <button id="all" :class="{ on: activeTab === 'all' }" @click="changeTab('all')">همه</button>
+      <button id="active" :class="{ on: activeTab === 'active' }" @click="changeTab('active')">فعال</button>
+      <button id="completed" :class="{ on: activeTab === 'completed' }" @click="changeTab('completed')">تکمیل</button>
     </div>
     <div class="corner">
       <button id="clear-completed" @click="deleteCompleted">
@@ -18,6 +18,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      activeTab: "all",
+    };
+  },
   props: {
     counter: Number,
   },
@@ -28,11 +33,11 @@ export default {
       }
     },
 
-    unCheckedTask() {
-      this.$emit("unCheckedTask");
+    changeTab(status) {
+      this.activeTab = status;
+      this.$emit("activeTab", this.activeTab);
     },
   },
-  computed: {},
 };
 </script>
 

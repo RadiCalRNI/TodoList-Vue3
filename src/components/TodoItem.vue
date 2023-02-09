@@ -11,7 +11,7 @@
     </div>
     <p class="item">
       <del v-if="todo.isComplete">{{ todo.title }}</del>
-      <span v-else>{{ todo.title }}</span>
+      <span v-else v-text="todo.title"></span>
     </p>
     <button class="clear" @click="deleteTodo">
       <img src="../assets/images/icon-cross.svg" alt="Clear it" />

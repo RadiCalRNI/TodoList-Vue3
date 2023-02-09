@@ -5,7 +5,7 @@
 
     <ul class="todos">
       <todo-item
-        v-for="(task, index) in todoList"
+        v-for="(task, index) in list"
         :key="task.key"
         :todo="task"
         @delete="deleteTodo"
@@ -19,6 +19,7 @@
     <app-stat
       @deleteCompleted="deleteCompleted"
       :counter="unCheckedTask"
+      @activeTab="getTodo"
     ></app-stat>
   </main>
   <app-footer></app-footer>
@@ -43,6 +44,7 @@ export default {
     return {
       todoList: [],
       dragging: -1,
+      tab: "",
     };
   },
 
@@ -78,6 +80,10 @@ export default {
       const element = this.todoList.splice(this.dragging, 1)[0];
       this.todoList.splice(index, 0, element);
     },
+
+    getTodo(activeTab) {
+      this.tab = activeTab;
+    },
   },
 
   computed: {
@@ -85,7 +91,18 @@ export default {
       let unCheckedTasks = this.todoList.filter(
         (item) => item.isComplete == false
       );
-      return unCheckedTasks.length
+      return unCheckedTasks.length;
+    },
+    list() {
+      if (this.tab == "all") {
+        return this.todoList;
+      } else if (this.tab == "active") {
+        return this.todoList.filter((item) => item.isComplete === false);
+      } else if (this.tab == "completed") {
+        return this.todoList.filter((item) => item.isComplete === true);
+      } else {
+        return this.todoList;
+      }
     },
   },
 };
